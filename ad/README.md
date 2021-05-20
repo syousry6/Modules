@@ -2,7 +2,6 @@
 Create AWS Managed Microsoft AD - AWS Directory Service in two private subnets.
 
 
-We can use those EC2 to be promoted to be a domain controllers with on prem AD
 
 ## Usage
 
