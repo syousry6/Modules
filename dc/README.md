@@ -34,7 +34,7 @@ Note that this example may create resources which can cost money. Run `terraform
 
 | Name | Source | Version |
 |------|--------|---------|
-| ec2 | ../../ |  |
+| dc | ../../ |  |
 
 ## Resources
 
