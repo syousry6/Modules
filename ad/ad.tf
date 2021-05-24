@@ -74,7 +74,6 @@ variable "enable_sso" {
 
 locals {
   ds_alias           = replace("${var.namespace}-${var.ds_subdomain_name}-${var.stage}", "-prd", "")
-  ds_iam             = join("-", [local.module_prefix, var.ds_subdomain_name])
   vpc_subdomain_name = replace("${var.stage}.${var.environment}", "prd.", "")
   ds_zone_name       = replace("${var.stage}.${var.ds_subdomain_name}.${var.parent_domain_name}", "prd.", "")
 }
@@ -152,7 +151,7 @@ resource "aws_directory_service_directory" "ds" {
 #   name    = "aws"
 #   type    = "CNAME"
 #   ttl     = "30"
-#   records = ["${local.ds_alias}.YYY.com"]
+#   records = ["${local.ds_alias}.awsapps.com"]
 # }
 
 # Allow Directory Services to login to console
@@ -173,7 +172,7 @@ data "aws_iam_policy_document" "ds" {
 
 resource "aws_iam_role" "ds_administrator" {
   count       = var.create ? 1 : 0
-  name        = "${local.ds_iam}-administrator"
+  name        = "${local.ds_alias}-administrator"
   description = join(" ", list(var.desc_prefix, "Directory Services AWS Delegated Administrator"))
 
   assume_role_policy = data.aws_iam_policy_document.ds[0].json
